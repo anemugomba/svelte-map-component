@@ -146,8 +146,6 @@
                 maxZoom: 25
             });
 
-            let editable_layer = new L.FeatureGroup();
-
             let base_maps = {
                 "OpenStreetMap": open_street_maps_tile_layer,
                 "GoogleSatellite": google_tile_layer

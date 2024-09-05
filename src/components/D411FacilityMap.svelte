@@ -233,7 +233,9 @@
                 closeEditMode()
             });
 
+            console.log('drawItemsOnMapFromDock411Json in', d411FacilityMapData)
             drawItemsOnMapFromDock411Json(d411FacilityMapData);
+
             if (!editMode) {
                 for (const [key, value] of Object.entries(editable_layer._layers)) {
                     value.dragging.disable()
@@ -283,6 +285,9 @@
                 }))
                 d411FacilityMapData = {...map_data_to_edit}
             });
+
+            console.log('marker', marker);
+
             marker.addTo(editable_layer)
             markers.push(value)
         })

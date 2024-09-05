@@ -183,9 +183,6 @@
 
             map.addLayer(editable_layer);
 
-            console.log(editable_layer); // This should log the FeatureGroup instance
-            console.log(map); // This should log the map instance
-
             draw_control = new L.Control.Draw({
                 position: 'topleft',
                 draw: {
@@ -812,7 +809,7 @@
     }
 
     $: if (d411FacilityMapData) {
-        // console.log(d411FacilityMapData)
+        console.log(d411FacilityMapData)
     }
 
 

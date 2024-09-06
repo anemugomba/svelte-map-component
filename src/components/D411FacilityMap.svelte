@@ -1,8 +1,4 @@
-<svelte:options customElement={{tag: 'd411-facility-map',shadow: 'none'}}/>
-
-<script context="module">
-    export const ssr = false;
-</script>
+<!--<svelte:options customElement={{tag: 'd411-facility-map',shadow: 'none'}}/>-->
 
 <script lang="ts">
     import L from "leaflet"; // see this comment on how to import leaflet // https://github.com/Leaflet/Leaflet/issues/8451#issuecomment-1255151316
@@ -41,6 +37,8 @@
     export let poisAndHazards = null;
     export let width = null;
     export let height = null;
+
+    export let recenterMap = undefined;
 
     let map;
     let open_street_maps_tile_layer;
@@ -231,7 +229,6 @@
                 closeEditMode()
             });
 
-            console.log('drawItemsOnMapFromDock411Json in', d411FacilityMapData)
             drawItemsOnMapFromDock411Json(d411FacilityMapData);
 
             if (!editMode) {
@@ -283,8 +280,6 @@
                 }))
                 d411FacilityMapData = {...map_data_to_edit}
             });
-
-            console.log('marker', marker);
 
             marker.addTo(editable_layer)
             markers.push(value)
@@ -684,6 +679,10 @@
         dispatchMapData()
     }
 
+    $: if (lat && lng && map) {
+        map.setView([lat, lng]);
+    }
+
     const initiateAreaDraw = () => {
         draw_control.options.draw.polygon.shapeOptions.color = clicked_layer_information.border
         document.getElementById("map").focus();
@@ -809,10 +808,6 @@
         }
         draw_marker = new L.Draw.Marker(map, {icon: setMarkerIconProperties(icon), "draggable": true});
         draw_marker.enable();
-    }
-
-    $: if (d411FacilityMapData) {
-        console.log(d411FacilityMapData)
     }
 
 
